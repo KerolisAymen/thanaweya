@@ -74,12 +74,11 @@
   <div class="container">
 
     <label for="seating">
-      <h1>
-        ادخل رقم الجلوس
-      </h1>
+      <h2>
+        نتيجة الثانوية العامة 2024      </h2>
     </label>
 
-    <input type="text" id="seating">
+    <input type="text" id="seating" placeholder="ادخل رقم الجلوس او الاسم">
 
     <br>
 
@@ -105,7 +104,9 @@
       .then(data => {
         console.log("sent");
         console.log(data); 
-        addstudent(data); 
+        data.forEach(student => {
+          addstudent(student); 
+        }); 
       })
       .catch(err => {
         console.log(err);
@@ -136,20 +137,8 @@
 </script>
 
 
-
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3366182886185599"
      crossorigin="anonymous"></script>
-<!-- 2024 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3366182886185599"
-     data-ad-slot="3305669930"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 
 
 </body>
