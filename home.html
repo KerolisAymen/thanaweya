@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+
+  <style>
+    body {
+      display: flex;
+    background-color: aliceblue;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+    .container {
+      background-color: white;
+      padding: 20pt;
+      border-radius: 5pt;
+      box-shadow: 0 0 6px 0px black;
+      margin: 10pt;
+    }
+
+
+    /* CSS */
+    .button-9 {
+      appearance: button;
+      backface-visibility: hidden;
+      background-color: #405cf5;
+      border-radius: 6px;
+      border-width: 0;
+      box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+      font-size: 100%;
+      height: 44px;
+      line-height: 1.15;
+      margin: 12px 0 0;
+      outline: none;
+      overflow: hidden;
+      padding: 0 25px;
+      position: relative;
+      text-align: center;
+      text-transform: none;
+      transform: translateZ(0);
+      transition: all .2s, box-shadow .08s ease-in;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: 100%;
+    }
+
+    .button-9:disabled {
+      cursor: default;
+    }
+
+    .button-9:focus {
+      box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <label for="seating">
+      <h1>
+        ادخل رقم الجلوس
+      </h1>
+    </label>
+
+    <input type="text" id="seating">
+
+    <br>
+
+    <button class="button-9" onclick="show()">submit</button>
+
+
+  </div>
+
+
+  <script>
+    function show() {
+      var seating = document.getElementById("seating").value; 
+      console.log(JSON.stringify(seating)); 
+
+      fetch("/getdata", {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({ seating })
+      })
+      .then(response => response.json()) // Correctly parse the JSON response
+      .then(data => {
+        console.log("sent");
+        console.log(data); 
+        addstudent(data); 
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+
+    function addstudent(data) {
+      const body = document.getElementsByTagName("body")[0]; 
+      const newcontainer = document.createElement("div");
+      newcontainer.className = "container"; 
+      newcontainer.innerHTML = `
+        <h2>الاسم</h2> 
+        <h2>${data.name}</h2>
+        <br>
+        <h2>الدرجة</h2> 
+        <h2>${data.degree}</h2>
+         <br>
+        
+ <h2>النسبة المئوية</h2> 
+        <h2>${data.degree/410 * 100}</h2>
+        
+         <br>
+        <h2>${data.student_case_desc}</h2>
+      `;
+      body.appendChild(newcontainer); // Correct method name
+      console.log(newcontainer);
+    }
+</script>
+
+</body>
+
+</html>
