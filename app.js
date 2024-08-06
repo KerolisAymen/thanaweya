@@ -28,6 +28,7 @@ app.get("/" , (req,res)=>{
 })
 app.post("/getdata", async(req, res) => {
   console.log(req.body.seating) ; 
+  var students ; 
     const search = req.body.seating;
     if (isNaN(search)){
       const name  = search ; 
@@ -35,18 +36,17 @@ app.post("/getdata", async(req, res) => {
       const students  = await Student.find({name : { $regex: re ,$options:'i' }}) ; 
       
       if(students != undefined){
-      console.log(students); 
       res.send(JSON.stringify(students)) ; 
+      console.log("search by name" + name);
     }
     }
     else
     {
       const seating = search ; 
-    const student  = await Student.find({seating : seating}) ; 
-    if(student!=undefined) {
-      console.log(student);
-      console.log(JSON.stringify(student));
-        res.send(JSON.stringify(student)) ; 
+    students  = await Student.find({seating : seating}) ; 
+    if(students!=undefined) {
+        res.send(JSON.stringify(students)) ; 
+        console.log(students[0]);
     }
   }
 });
