@@ -12,6 +12,7 @@
 
   <style>
     body {
+    direction: rtl;
       display: flex;
     background-color: aliceblue;
     text-align: center;
@@ -80,6 +81,9 @@
       border-radius: 5pt;
       width: -webkit-fill-available; 
     }
+    h5{
+      margin: 0em;
+    }
   </style>
 </head>
 
@@ -136,21 +140,11 @@
       
       
       var html = `
-      <h2>رقم الجلوس</h2> 
-        <h2>${data.seating}</h2>
-        <br>
-        <h2>الاسم</h2> 
-        <h2>${data.name}</h2>
-        <br>
-        <h2>الدرجة</h2> 
-        <h2>${data.degree}</h2>
-         <br>
-        
- <h2>النسبة المئوية</h2> 
-        <h2>${data.degree/410 * 100}</h2>
-        
-         <br>
-        <h2>${data.student_case_desc}</h2>
+      <h5>  رقم الجلوس : ${data.seating} </h5> 
+       <h5>  الاسم : ${data.name} </h5> 
+        <h5>  الدرجة : ${data.degree} </h5>
+        <h5>  النسبة المئوية : ${Math.round(data.degree/410 *10000)/100}%</h2>
+        <h5>${data.student_case_desc}</h5>
       `;
 
       newcontainer.innerHTML = html ;
